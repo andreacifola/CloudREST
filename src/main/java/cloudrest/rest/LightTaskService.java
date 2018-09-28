@@ -1,7 +1,7 @@
 package cloudrest.rest;
 
 import cloudrest.entities.LightTask;
-import cloudrest.tasksolver.LightTaskSolver;
+import cloudrest.solver.LightTaskSolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

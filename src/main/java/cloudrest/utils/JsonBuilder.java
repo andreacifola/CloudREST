@@ -1,10 +1,10 @@
 package cloudrest.utils;
 
-
-import fognoderest.entities.FogNode;
+import cloudrest.entities.FogNode;
 
 public class JsonBuilder {
 
+    //TODO sistemare json
     public String nodeToJson(FogNode fogNode){
         String payload = "{ \"id\" : " + fogNode.getId() + ", \"ram\" : " + fogNode.getRam() + ", \"cpu\" : " +
                 fogNode.getCpu() + ", \"battery\" : " + fogNode.getBattery() + ", \"storage\" : " +
@@ -13,7 +13,7 @@ public class JsonBuilder {
                 fogNode.getCurrentCpu() + ", \"currentBattery\" : " + fogNode.getCurrentBattery() +
                 ", \"currentStorage\" : " + fogNode.getCurrentStorage() + ", \"latitude\" : " +
                 fogNode.getLatitude() + ", \"longitude\" : " + fogNode.getLongitude() +
-                ", \"powered\" : \"" + fogNode.getPowered() + "\"}";
+                ", \"powered\" : \"" /*+ fogNode.getPowered()*/ + "\"}";
         return payload;
     }
 }

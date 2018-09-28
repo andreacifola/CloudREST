@@ -1,6 +1,7 @@
 package cloudrest.solver;
 
-import fognoderest.entities.MediumTask;
+import cloudrest.entities.MediumTask;
+
 
 public class MediumTaskSolver {
 
