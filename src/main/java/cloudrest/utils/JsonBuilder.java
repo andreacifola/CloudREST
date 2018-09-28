@@ -1,19 +1,33 @@
 package cloudrest.utils;
 
-import cloudrest.entities.FogNode;
+import cloudrest.entities.HeavyTask;
+import cloudrest.entities.LightTask;
+import cloudrest.entities.MediumTask;
 
 public class JsonBuilder {
 
-    //TODO sistemare json
-    public String nodeToJson(FogNode fogNode){
-        String payload = "{ \"id\" : " + fogNode.getId() + ", \"ram\" : " + fogNode.getRam() + ", \"cpu\" : " +
-                fogNode.getCpu() + ", \"battery\" : " + fogNode.getBattery() + ", \"storage\" : " +
-                fogNode.getStorage() + ", \"type\" : " + "\"" + fogNode.getType() + "\"" + ", \"port\" : " +
-                "\"" + fogNode.getPort() + "\", \"currentRam\" : " + fogNode.getCurrentRam() + ", \"currentCpu\" : " +
-                fogNode.getCurrentCpu() + ", \"currentBattery\" : " + fogNode.getCurrentBattery() +
-                ", \"currentStorage\" : " + fogNode.getCurrentStorage() + ", \"latitude\" : " +
-                fogNode.getLatitude() + ", \"longitude\" : " + fogNode.getLongitude() +
-                ", \"powered\" : \"" /*+ fogNode.getPowered()*/ + "\"}";
+    public String LightTaskToJSON(LightTask task){
+        String payload="{ \"id\" : \"" + task.getID() + "\" , \"type\" : \"" + task.getType() + "\", \"toEncrypt\": \"" +
+                task.getToEncrypt() + "\", \"consumption\" : " + task.getConsumption() + ", \"latitude\" : \"" +
+                task.getLatitude() + "\", \"longitude\" : \"" + task.getLongitude() + "\"}";
+        System.out.println(payload);
+        return payload;
+    }
+
+    public String MediumTaskToJSON(MediumTask task){
+        String payload="{ \"id\" : \"" + task.getID() + "\" , \"type\" : \"" + task.getType() + "\", \"number\": \"" +
+                task.getNumber() + "\", \"consumption\" : " + task.getConsumption() + ", \"latitude\" : \"" +
+                task.getLatitude() + "\", \"longitude\" : \"" + task.getLongitude() + "\"}";
+        System.out.println(payload);
+        return payload;
+    }
+
+    public String HeavyTaskToJSON(HeavyTask task){
+        String payload="{ \"id\" : \"" + task.getID() + "\" , \"type\" : \"" + task.getType() + "\", \"response\" : \"\"" +
+                ", \"consumption\" : " + task.getConsumption() + ", \"latitude\" : \"" +
+                task.getLatitude() + "\", \"longitude\" : \"" + task.getLongitude() + "\"}";
+        System.out.println(payload);
         return payload;
     }
 }
+
