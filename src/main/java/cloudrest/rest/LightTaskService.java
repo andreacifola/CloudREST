@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static java.lang.System.exit;
-
 @RestController
 @RequestMapping(path = "lightCloud")
 public class LightTaskService {
@@ -31,4 +29,5 @@ public class LightTaskService {
         System.out.println("lightTask Eseguito");
 
         return new ResponseEntity<>(lightTask, HttpStatus.OK);
+    }
 }

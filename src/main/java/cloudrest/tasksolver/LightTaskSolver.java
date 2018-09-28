@@ -1,8 +1,7 @@
 package cloudrest.tasksolver;
 
 import cloudrest.entities.LightTask;
-import fognoderest.entities.LightTask;
-import fognoderest.utils.UtilityMD5;
+import cloudrest.utils.UtilityMD5;
 
 
 public class LightTaskSolver {
