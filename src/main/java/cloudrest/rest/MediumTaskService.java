@@ -1,6 +1,7 @@
 package cloudrest.rest;
 
 import cloudrest.entities.MediumTask;
+import cloudrest.solver.LightTaskSolver;
 import cloudrest.solver.MediumTaskSolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,11 @@ public class MediumTaskService {
 
         System.out.println("mediumTask Received - NODE");
 
-        MediumTaskSolver solver = new MediumTaskSolver();
-        mediumTask.setTime(solver.count(mediumTask));
+        new Thread(() -> {
+            MediumTaskSolver solver = new MediumTaskSolver();
+            mediumTask.setTime(solver.count(mediumTask));
+        }).start();
+
         System.out.println("mediumTask Eseguito");
 
         return new ResponseEntity<>(mediumTask, HttpStatus.OK);

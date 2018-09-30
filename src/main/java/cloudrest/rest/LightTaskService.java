@@ -24,8 +24,11 @@ public class LightTaskService {
         //responseWriter.sendResponse("Processing Task...",response);
         System.out.println("lightTask Received - NODE");
 
-        LightTaskSolver solver = new LightTaskSolver();
-        lightTask.setEncrypted(solver.hash(lightTask));
+        new Thread(() -> {
+            LightTaskSolver solver = new LightTaskSolver();
+            lightTask.setEncrypted(solver.hash(lightTask));
+        }).start();
+
         System.out.println("lightTask Eseguito");
 
         return new ResponseEntity<>(lightTask, HttpStatus.OK);

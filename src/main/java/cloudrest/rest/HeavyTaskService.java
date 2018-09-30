@@ -2,6 +2,7 @@ package cloudrest.rest;
 
 import cloudrest.entities.HeavyTask;
 import cloudrest.solver.HeavyTaskSolver;
+import cloudrest.solver.LightTaskSolver;
 import cloudrest.utils.ResponseWriter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,11 @@ public class HeavyTaskService {
         //responseWriter.sendResponse("Processing Task...",response);
         System.out.println("heavyTask Received - NODE");
 
-        HeavyTaskSolver solver = new HeavyTaskSolver();
-        heavyTask.setResponse(solver.fibonacci(heavyTask.getN()));
+        new Thread(() -> {
+            HeavyTaskSolver solver = new HeavyTaskSolver();
+            heavyTask.setResponse(solver.fibonacci(heavyTask.getN()));
+        }).start();
+
         System.out.println("heavyTask Eseguito");
 
 
