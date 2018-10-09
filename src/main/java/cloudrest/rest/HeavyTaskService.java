@@ -28,7 +28,17 @@ public class HeavyTaskService {
 
         new Thread(() -> {
             HeavyTaskSolver solver = new HeavyTaskSolver();
-            heavyTask.setResponse(solver.fibonacci(heavyTask.getN()));
+            if (heavyTask.getLast()==0){
+                // inizia il job da 0
+
+                heavyTask.setResponse(solver.factorial(heavyTask.getN()));
+                System.out.println(heavyTask.getResponse());
+            }else{
+                //il job è stato precedentemente interrotto quindi riprendi il calcolo da last
+
+                heavyTask.setResponse(solver.factorial(heavyTask.getN(),heavyTask.getPartial(),heavyTask.getLast()));
+
+            }
         }).start();
 
         System.out.println("heavyTask Eseguito");
