@@ -4,6 +4,7 @@ public class MediumTask extends Task {
 
     private int encrypt;
     private long time;
+    private Integer state;
 
     public int getNumber() {
         return encrypt;
@@ -20,4 +21,8 @@ public class MediumTask extends Task {
     public void setTime(long time) {
         this.time = time;
     }
+
+    public Integer getState() { return state; }
+
+    public void setState(Integer state) { this.state = state; }
 }
