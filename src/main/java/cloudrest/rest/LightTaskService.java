@@ -25,8 +25,12 @@ public class LightTaskService {
         System.out.println("lightTask Received - NODE");
 
         new Thread(() -> {
-            LightTaskSolver solver = new LightTaskSolver();
-            lightTask.setEncrypted(solver.hash(lightTask));
+            try {
+                LightTaskSolver solver = new LightTaskSolver();
+                lightTask.setEncrypted(solver.CaesarCode(lightTask));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }).start();
 
         System.out.println("lightTask Eseguito");
