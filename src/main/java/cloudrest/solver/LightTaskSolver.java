@@ -17,10 +17,18 @@ public class LightTaskSolver {
         int i;
         for (i = loopCount+1; i < toEncrypt.length(); i++) {
             char letter = toEncrypt.charAt(i);
+
             if (Character.isLetter(letter)) {
-                letter += 3;
+                if(letter == 'x')
+                    letter = 'a';
+                else if(letter == 'y')
+                    letter = 'b';
+                else if(letter == 'z')
+                    letter = 'c';
+                else
+                    letter += 3;
+                encrypted += letter;
             }
-            encrypted += letter;
         }
         return encrypted;
     }
