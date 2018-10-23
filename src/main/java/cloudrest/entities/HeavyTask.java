@@ -7,7 +7,9 @@ public class HeavyTask extends Task{
     private int n;
     private BigInteger partial;
     private BigInteger response;
-    private int last = 0;
+    private int last;
+
+    public HeavyTask() {}
 
     public BigInteger getResponse() {
         return response;
@@ -34,6 +36,7 @@ public class HeavyTask extends Task{
     public int getLast() {
         return last;
     }
+
     public void setLast(int last) {
         this.last = last;
     }

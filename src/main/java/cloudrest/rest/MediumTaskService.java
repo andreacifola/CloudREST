@@ -1,7 +1,6 @@
 package cloudrest.rest;
 
 import cloudrest.entities.MediumTask;
-import cloudrest.solver.LightTaskSolver;
 import cloudrest.solver.MediumTaskSolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +19,23 @@ public class MediumTaskService {
     //ResponseWriter responseWriter = new ResponseWriter();
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<MediumTask> solveMediumTask(@RequestBody MediumTask mediumTask, HttpServletResponse response) throws IOException {
-
+    public ResponseEntity<MediumTask> solveMediumTask(@RequestBody MediumTask mediumTask, HttpServletResponse response) throws IOException, InterruptedException {
         //responseWriter.sendResponse("Processing Task...",response);
 
         System.out.println("mediumTask Received - NODE");
 
-        new Thread(() -> {
+        Thread t = new Thread(() -> {
             MediumTaskSolver solver = new MediumTaskSolver();
-            mediumTask.setTime(solver.count(mediumTask));
-        }).start();
 
-        System.out.println("mediumTask Eseguito");
+            try {
+                mediumTask.setTime(solver.count(mediumTask, mediumTask.getState(), mediumTask.getCurrentTime()));            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        t.start();
+        t.join();
 
+        System.out.println("mediumTask Eseguito in " + mediumTask.getTime());
         return new ResponseEntity<>(mediumTask, HttpStatus.OK);
     }
 }

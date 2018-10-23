@@ -2,19 +2,27 @@ package cloudrest.solver;
 
 import cloudrest.entities.MediumTask;
 
+import java.io.IOException;
+import java.math.BigInteger;
 
 public class MediumTaskSolver {
 
-    public long count(MediumTask task) {
-        int cont = 0, i;
-        long start = System.currentTimeMillis();
-        for (i = 0; i < 10000000; i++) {
-            cont++;
-            if (task.getNumber() == cont)
+    public long count(MediumTask mediumTask, Integer state, Long currentTime) throws IOException, InterruptedException {
+        int i;
+
+        //recupero il tempo che eventualmente può essere legato ad una esecuzione precedente
+        Long time = mediumTask.getCurrentTime();
+
+        Long start = System.currentTimeMillis();
+
+        for (i = state+1; i < 1000000; i++) {
+            if (mediumTask.getNumber() == i) {
                 break;
+            }
         }
-        long time = System.currentTimeMillis()-start;
-        System.out.println("mediumTask completato in" + time);
+
+        //lo aggiorno con il tempo della esecuzione attuale
+        time = time + System.currentTimeMillis() - start + 5;
         return time;
     }
 }

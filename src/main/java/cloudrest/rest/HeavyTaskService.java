@@ -2,7 +2,6 @@ package cloudrest.rest;
 
 import cloudrest.entities.HeavyTask;
 import cloudrest.solver.HeavyTaskSolver;
-import cloudrest.solver.LightTaskSolver;
 import cloudrest.utils.ResponseWriter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -21,29 +19,20 @@ public class HeavyTaskService {
     ResponseWriter responseWriter = new ResponseWriter();
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<HeavyTask> solveHeavyTask(@RequestBody HeavyTask heavyTask, HttpServletResponse response) throws IOException {
+    public ResponseEntity<HeavyTask> solveHeavyTask(@RequestBody HeavyTask heavyTask, HttpServletResponse response) throws IOException, InterruptedException {
 
         //responseWriter.sendResponse("Processing Task...",response);
         System.out.println("heavyTask Received - NODE");
 
-        new Thread(() -> {
+        Thread t = new Thread(() -> {
             HeavyTaskSolver solver = new HeavyTaskSolver();
-            if (heavyTask.getLast()==0){
-                // inizia il job da 0
+            heavyTask.setResponse(solver.factorial(heavyTask, heavyTask.getN(), heavyTask.getPartial(), heavyTask.getLast()));
 
-                heavyTask.setResponse(solver.factorial(heavyTask.getN()));
-                System.out.println(heavyTask.getResponse());
-            }else{
-                //il job è stato precedentemente interrotto quindi riprendi il calcolo da last
+        });
+        t.start();
+        t.join();
 
-                heavyTask.setResponse(solver.factorial(heavyTask.getN(),heavyTask.getPartial(),heavyTask.getLast()));
-
-            }
-        }).start();
-
-        System.out.println("heavyTask Eseguito");
-
-
+        System.out.println("heavyTask Eseguito. Il fattoriale è " + heavyTask.getResponse());
         return new ResponseEntity<>(heavyTask, HttpStatus.OK);
     }
 }
