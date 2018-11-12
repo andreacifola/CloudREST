@@ -1,6 +1,7 @@
 package cloudrest.solver;
 
 import cloudrest.entities.MediumTask;
+import cloudrest.handler.InterruptionHandler;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -16,6 +17,17 @@ public class MediumTaskSolver {
         Long start = System.currentTimeMillis();
 
         for (i = state+1; i < 1000000; i++) {
+
+            //controllo interruzione
+            boolean flag = InterruptionHandler.getInstance().getFlagByTask(mediumTask.getID());
+
+            if(flag){
+                //interruption
+                System.out.println("job da interrompere");
+                return 0;
+            }
+
+
             if (mediumTask.getNumber() == i) {
                 break;
             }

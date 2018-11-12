@@ -1,6 +1,8 @@
 package cloudrest.solver;
 
 import cloudrest.entities.LightTask;
+import cloudrest.handler.InterruptionHandler;
+
 import java.io.IOException;
 
 public class LightTaskSolver {
@@ -16,6 +18,16 @@ public class LightTaskSolver {
 
         int i;
         for (i = loopCount+1; i < toEncrypt.length(); i++) {
+
+            //controllo interruzione
+            boolean flag = InterruptionHandler.getInstance().getFlagByTask(lightTask.getID());
+
+            if(flag){
+                //interruption
+                System.out.println("job da interrompere");
+                return null;
+            }
+
             char letter = toEncrypt.charAt(i);
 
             if (Character.isLetter(letter)) {

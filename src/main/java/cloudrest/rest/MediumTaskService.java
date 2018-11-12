@@ -1,13 +1,11 @@
 package cloudrest.rest;
 
 import cloudrest.entities.MediumTask;
+import cloudrest.handler.InterruptionHandler;
 import cloudrest.solver.MediumTaskSolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -18,15 +16,18 @@ import java.io.IOException;
 public class MediumTaskService {
     //ResponseWriter responseWriter = new ResponseWriter();
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity<MediumTask> solveMediumTask(@RequestBody MediumTask mediumTask, HttpServletResponse response) throws IOException, InterruptedException {
+    @RequestMapping(path = "{id}", method = RequestMethod.POST)
+    public ResponseEntity<MediumTask> solveMediumTask(@PathVariable int id, @RequestBody MediumTask mediumTask, HttpServletResponse response) throws IOException, InterruptedException {
         //responseWriter.sendResponse("Processing Task...",response);
 
         System.out.println("mediumTask Received - NODE");
+        mediumTask.setID(id);
+
+        //aggiungo task a lista task
+        InterruptionHandler.getInstance().addTaskToList(mediumTask);
 
         Thread t = new Thread(() -> {
             MediumTaskSolver solver = new MediumTaskSolver();
-
             try {
                 mediumTask.setTime(solver.count(mediumTask, mediumTask.getState(), mediumTask.getCurrentTime()));            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
@@ -36,6 +37,8 @@ public class MediumTaskService {
         t.join();
 
         System.out.println("mediumTask Eseguito in " + mediumTask.getTime());
+        InterruptionHandler.getInstance().removeTask(mediumTask.getID());
+
         return new ResponseEntity<>(mediumTask, HttpStatus.OK);
     }
 }
