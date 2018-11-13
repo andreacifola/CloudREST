@@ -20,6 +20,7 @@ public class LightTaskService {
     public ResponseEntity<LightTask> solveLightTask(@PathVariable int id, @RequestBody LightTask lightTask, HttpServletResponse response) throws IOException, InterruptedException {
 
         //responseWriter.sendResponse("Processing Task...",response);
+        System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("lightTask Received - NODE");
         lightTask.setID(id);
 
@@ -38,7 +39,7 @@ public class LightTaskService {
         t.start();
         t.join();
 
-        System.out.println("lightTask Eseguito. Testo cifrato: " + lightTask.getEncrypted());
+        System.out.println("lightTask Eseguito. Testo cifrato: " + lightTask.getEncrypted() + "\n");
         InterruptionHandler.getInstance().removeTask(lightTask.getID());
 
         return new ResponseEntity<>(lightTask, HttpStatus.OK);

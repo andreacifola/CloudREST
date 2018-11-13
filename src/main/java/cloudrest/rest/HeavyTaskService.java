@@ -21,6 +21,7 @@ public class HeavyTaskService {
     public ResponseEntity<HeavyTask> solveHeavyTask(@PathVariable int id, @RequestBody HeavyTask heavyTask, HttpServletResponse response) throws IOException, InterruptedException {
 
         //responseWriter.sendResponse("Processing Task...",response);
+        System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("heavyTask Received - NODE");
         heavyTask.setID(id);
 
@@ -35,7 +36,7 @@ public class HeavyTaskService {
         t.start();
         t.join();
 
-        System.out.println("heavyTask Eseguito. Il fattoriale è " + heavyTask.getResponse());
+        System.out.println("heavyTask Eseguito. Il fattoriale è " + heavyTask.getResponse() + "\n");
         InterruptionHandler.getInstance().removeTask(heavyTask.getID());
 
         return new ResponseEntity<>(heavyTask, HttpStatus.OK);

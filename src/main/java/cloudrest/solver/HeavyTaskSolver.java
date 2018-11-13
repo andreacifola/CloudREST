@@ -25,7 +25,7 @@ public class HeavyTaskSolver {
             fact = fact.multiply(BigInteger.valueOf(i));
         }
 
-        System.out.println("fattoriale di n = " + n + ": " + fact);
+        System.out.println("Heavy task esetfattoriale di n = " + n + ": " + fact);
         return fact;
     }
 }
