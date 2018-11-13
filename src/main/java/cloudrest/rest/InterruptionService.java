@@ -31,9 +31,6 @@ public class InterruptionService {
             System.out.println("Interruption request rejected - id: "+id+"\n");
 
         }
-
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
-
 }

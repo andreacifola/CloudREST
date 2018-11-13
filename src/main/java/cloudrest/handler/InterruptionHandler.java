@@ -49,17 +49,11 @@ public class InterruptionHandler {
     }
 
     public void removeTask(int id){
-
         for (int i = 0; i < taskList.size(); i++) {
-
             if(taskList.get(i).getTask().getID() == id){
-
                 taskList.remove(i);
-
             }
-
         }
-
     }
 }
 
@@ -92,5 +86,3 @@ class TaskFlag{
         this.flag = flag;
     }
 }
-
-

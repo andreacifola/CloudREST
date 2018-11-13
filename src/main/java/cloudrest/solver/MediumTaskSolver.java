@@ -13,11 +13,9 @@ public class MediumTaskSolver {
 
         //recupero il tempo che eventualmente può essere legato ad una esecuzione precedente
         Long time = mediumTask.getCurrentTime();
-
         Long start = System.currentTimeMillis();
 
         for (i = state+1; i < 1000000; i++) {
-
             //controllo interruzione
             boolean flag = InterruptionHandler.getInstance().getFlagByTask(mediumTask.getID());
 
@@ -26,8 +24,6 @@ public class MediumTaskSolver {
                 System.out.println("job da interrompere");
                 return 0;
             }
-
-
             if (mediumTask.getNumber() == i) {
                 break;
             }
