@@ -17,6 +17,10 @@ public class HeavyTaskService {
 
     ResponseWriter responseWriter = new ResponseWriter();
 
+    /**
+     *
+     * REST method: middleware sends heavy tasks to solve
+     */
     @RequestMapping(path = "{id}", method = RequestMethod.POST)
     public ResponseEntity<HeavyTask> solveHeavyTask(@PathVariable int id, @RequestBody HeavyTask heavyTask, HttpServletResponse response) throws IOException, InterruptedException {
 

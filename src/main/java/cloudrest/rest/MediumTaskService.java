@@ -14,11 +14,12 @@ import java.io.IOException;
 @RestController
 @RequestMapping(path = "mediumCloud")
 public class MediumTaskService {
-    //ResponseWriter responseWriter = new ResponseWriter();
 
+    /**
+     * REST method: middleware sends medium tasks to solve
+     */
     @RequestMapping(path = "{id}", method = RequestMethod.POST)
     public ResponseEntity<MediumTask> solveMediumTask(@PathVariable int id, @RequestBody MediumTask mediumTask, HttpServletResponse response) throws IOException, InterruptedException {
-        //responseWriter.sendResponse("Processing Task...",response);
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("mediumTask Received - NODE");
         mediumTask.setID(id);

@@ -8,6 +8,15 @@ import java.math.BigInteger;
 
 public class MediumTaskSolver {
 
+    /**
+     * this method computes a medium task, how long it would take to crack a password with bruce force.
+     * @param mediumTask : task
+     * @param state : keeps track of the progress
+     * @param currentTime : time
+     * @return : time
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public long count(MediumTask mediumTask, Integer state, Long currentTime) throws IOException, InterruptedException {
         int i;
 

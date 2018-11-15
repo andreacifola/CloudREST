@@ -14,8 +14,10 @@ import java.io.IOException;
 @RequestMapping(path = "lightCloud")
 public class LightTaskService {
 
-    //ResponseWriter responseWriter = new ResponseWriter();
 
+    /**
+     * REST method: middleware sends light tasks to solve
+     */
     @RequestMapping(path = "{id}", method = RequestMethod.POST)
     public ResponseEntity<LightTask> solveLightTask(@PathVariable int id, @RequestBody LightTask lightTask, HttpServletResponse response) throws IOException, InterruptedException {
 

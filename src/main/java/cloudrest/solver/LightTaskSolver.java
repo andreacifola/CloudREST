@@ -7,6 +7,13 @@ import java.io.IOException;
 
 public class LightTaskSolver {
 
+    /**
+     * This method computes a light task, the given text is encrypted.
+     * @param lightTask : task
+     * @param loopCount : keeps count of the progess of the algorithm
+     * @return encrypted text
+     * @throws IOException
+     */
     public String CaesarCode(LightTask lightTask, Integer loopCount) throws IOException {
         String toEncrypt = lightTask.getToEncrypt();
         String encrypted;
